@@ -18,6 +18,7 @@
 		222DE9C622347FBC008D61BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 222DE9C422347FBC008D61BA /* LaunchScreen.storyboard */; };
 		222DE9E3223480FB008D61BA /* Chart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222DE9E2223480FB008D61BA /* Chart.framework */; };
 		222DE9E4223480FB008D61BA /* Chart.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 222DE9E2223480FB008D61BA /* Chart.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		228D37112235D63E005D1B76 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D37102235D63E005D1B76 /* UIColor+Hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +48,7 @@
 		222DE9C522347FBC008D61BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		222DE9C722347FBC008D61BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		222DE9E2223480FB008D61BA /* Chart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Chart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		228D37102235D63E005D1B76 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				222DE9BB22347FBB008D61BA /* AppDelegate.swift */,
 				2203C40A2235A4B700102012 /* Model */,
 				2203C40B2235A4C400102012 /* View */,
+				228D370F2235D5C0005D1B76 /* Extensions */,
 				2203C4052235A1C300102012 /* Resources */,
 				222DE9C722347FBC008D61BA /* Info.plist */,
 			);
@@ -125,6 +128,14 @@
 				222DE9E2223480FB008D61BA /* Chart.framework */,
 			);
 			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		228D370F2235D5C0005D1B76 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				228D37102235D63E005D1B76 /* UIColor+Hex.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +214,7 @@
 				2203C40D2235A92B00102012 /* Chart.swift in Sources */,
 				2203C4102235AE1F00102012 /* Result.swift in Sources */,
 				222DE9BE22347FBB008D61BA /* ViewController.swift in Sources */,
+				228D37112235D63E005D1B76 /* UIColor+Hex.swift in Sources */,
 				2203C4092235A33400102012 /* ChartRepository.swift in Sources */,
 				222DE9BC22347FBB008D61BA /* AppDelegate.swift in Sources */,
 			);
