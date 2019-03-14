@@ -15,22 +15,27 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Statistic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yt1-Ma-NvB" customClass="ChartView" customModule="Chart">
-                                <rect key="frame" x="16" y="16" width="343" height="343"/>
-                                <color key="backgroundColor" red="0.1333333333" green="0.18823529410000001" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="yt1-Ma-NvB" secondAttribute="height" multiplier="1:1" id="xJ9-Ny-LEO"/>
-                                </constraints>
-                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Oof-If-NaH">
+                                <rect key="frame" x="16" y="80" width="343" height="100"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yt1-Ma-NvB" customClass="ChartView" customModule="Chart">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="100"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="V7S-tC-3ux"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.13333333333333333" green="0.18823529411764706" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="yt1-Ma-NvB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="HTV-jV-xCj"/>
-                            <constraint firstItem="yt1-Ma-NvB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Kew-oF-eR0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yt1-Ma-NvB" secondAttribute="trailing" constant="16" id="sZE-jH-7nT"/>
+                            <constraint firstItem="Oof-If-NaH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="3zf-hf-dAu"/>
+                            <constraint firstItem="Oof-If-NaH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Ewo-UQ-lYB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Oof-If-NaH" secondAttribute="trailing" constant="16" id="naP-V8-T3k"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -48,10 +53,9 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bX9-HY-hGW" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="wtm-Wf-c97">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wtm-Wf-c97">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.13333333333333333" green="0.18823529411764706" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

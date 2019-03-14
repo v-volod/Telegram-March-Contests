@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		222DE9DC223480BB008D61BA /* Chart.h in Headers */ = {isa = PBXBuildFile; fileRef = 222DE9DA223480BB008D61BA /* Chart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		222DE9E82234816A008D61BA /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222DE9E72234816A008D61BA /* ChartView.swift */; };
+		22D52743223B02B30051B6E7 /* IntRangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D52742223B02B30051B6E7 /* IntRangeExtensions.swift */; };
+		22D52745223B06410051B6E7 /* IntArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D52744223B06410051B6E7 /* IntArrayExtensions.swift */; };
+		22E01EEA2238409500100D12 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01EE92238409500100D12 /* Chart.swift */; };
+		22E01EEC223843C800100D12 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01EEB223843C800100D12 /* Graph.swift */; };
+		22E01EEF22384A4800100D12 /* GraphLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01EEE22384A4800100D12 /* GraphLayer.swift */; };
+		22E01EF4223864E000100D12 /* ChartLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01EF3223864E000100D12 /* ChartLayer.swift */; };
+		22E01EF622386A8800100D12 /* IBChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01EF522386A8800100D12 /* IBChart.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +23,13 @@
 		222DE9DA223480BB008D61BA /* Chart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Chart.h; sourceTree = "<group>"; };
 		222DE9DB223480BB008D61BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		222DE9E72234816A008D61BA /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		22D52742223B02B30051B6E7 /* IntRangeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntRangeExtensions.swift; sourceTree = "<group>"; };
+		22D52744223B06410051B6E7 /* IntArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntArrayExtensions.swift; sourceTree = "<group>"; };
+		22E01EE92238409500100D12 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
+		22E01EEB223843C800100D12 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		22E01EEE22384A4800100D12 /* GraphLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphLayer.swift; sourceTree = "<group>"; };
+		22E01EF3223864E000100D12 /* ChartLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLayer.swift; sourceTree = "<group>"; };
+		22E01EF522386A8800100D12 /* IBChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBChart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,9 +64,40 @@
 			children = (
 				222DE9DA223480BB008D61BA /* Chart.h */,
 				222DE9DB223480BB008D61BA /* Info.plist */,
-				222DE9E72234816A008D61BA /* ChartView.swift */,
+				22E01EE82238408900100D12 /* Model */,
+				22E01EED22384A2D00100D12 /* View */,
+				22E01EF0223855E300100D12 /* Extensions */,
 			);
 			path = Chart;
+			sourceTree = "<group>";
+		};
+		22E01EE82238408900100D12 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				22E01EE92238409500100D12 /* Chart.swift */,
+				22E01EEB223843C800100D12 /* Graph.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		22E01EED22384A2D00100D12 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				222DE9E72234816A008D61BA /* ChartView.swift */,
+				22E01EF3223864E000100D12 /* ChartLayer.swift */,
+				22E01EEE22384A4800100D12 /* GraphLayer.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		22E01EF0223855E300100D12 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				22E01EF522386A8800100D12 /* IBChart.swift */,
+				22D52742223B02B30051B6E7 /* IntRangeExtensions.swift */,
+				22D52744223B06410051B6E7 /* IntArrayExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,7 +179,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D52743223B02B30051B6E7 /* IntRangeExtensions.swift in Sources */,
+				22E01EEC223843C800100D12 /* Graph.swift in Sources */,
 				222DE9E82234816A008D61BA /* ChartView.swift in Sources */,
+				22E01EEF22384A4800100D12 /* GraphLayer.swift in Sources */,
+				22E01EF4223864E000100D12 /* ChartLayer.swift in Sources */,
+				22D52745223B06410051B6E7 /* IntArrayExtensions.swift in Sources */,
+				22E01EF622386A8800100D12 /* IBChart.swift in Sources */,
+				22E01EEA2238409500100D12 /* Chart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

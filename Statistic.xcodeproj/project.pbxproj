@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2203C4072235A24300102012 /* chart_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 2203C4062235A24300102012 /* chart_data.json */; };
 		2203C4092235A33400102012 /* ChartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203C4082235A33400102012 /* ChartRepository.swift */; };
-		2203C40D2235A92B00102012 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203C40C2235A92B00102012 /* Chart.swift */; };
+		2203C40D2235A92B00102012 /* Chart+Initialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203C40C2235A92B00102012 /* Chart+Initialization.swift */; };
 		2203C4102235AE1F00102012 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203C40F2235AE1F00102012 /* Result.swift */; };
 		222DE9BC22347FBB008D61BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222DE9BB22347FBB008D61BA /* AppDelegate.swift */; };
 		222DE9BE22347FBB008D61BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222DE9BD22347FBB008D61BA /* ViewController.swift */; };
@@ -38,7 +38,7 @@
 /* Begin PBXFileReference section */
 		2203C4062235A24300102012 /* chart_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chart_data.json; sourceTree = "<group>"; };
 		2203C4082235A33400102012 /* ChartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRepository.swift; sourceTree = "<group>"; };
-		2203C40C2235A92B00102012 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
+		2203C40C2235A92B00102012 /* Chart+Initialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Initialization.swift"; sourceTree = "<group>"; };
 		2203C40F2235AE1F00102012 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		222DE9B822347FBB008D61BA /* Statistic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Statistic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		222DE9BB22347FBB008D61BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				2203C4082235A33400102012 /* ChartRepository.swift */,
-				2203C40C2235A92B00102012 /* Chart.swift */,
+				2203C40C2235A92B00102012 /* Chart+Initialization.swift */,
 				2203C40F2235AE1F00102012 /* Result.swift */,
 			);
 			path = Model;
@@ -211,7 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2203C40D2235A92B00102012 /* Chart.swift in Sources */,
+				2203C40D2235A92B00102012 /* Chart+Initialization.swift in Sources */,
 				2203C4102235AE1F00102012 /* Result.swift in Sources */,
 				222DE9BE22347FBB008D61BA /* ViewController.swift in Sources */,
 				228D37112235D63E005D1B76 /* UIColor+Hex.swift in Sources */,

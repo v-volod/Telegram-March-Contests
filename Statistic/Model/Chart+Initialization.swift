@@ -7,13 +7,11 @@
 //
 
 import Foundation
+import Chart
 
-struct Chart {
-    let xCoordinates: [Int]
-    let yCoordinates: [[Int]]
-    let colors: [String]
+extension Chart {
     
-    init?(dict: [String: Any]) {
+    convenience init?(dict: [String: Any]) {
         guard let columns = dict[Key.columns] as? [[Any]],
             let colors = dict[Key.colors] as? [String: String] else { return nil }
         
@@ -42,26 +40,10 @@ struct Chart {
             let y0Coordinates = y0Values,
             let y1Coordinates = y1Values else { return nil }
         
-        self.colors = [y0Color, y1Color]
-        self.xCoordinates = xCoordinates
-        self.yCoordinates = [y0Coordinates, y1Coordinates]
+        let lines = [Graph(name: "y0", color: UIColor(hex: y0Color)!, values: y0Coordinates),
+                     Graph(name: "y1", color: UIColor(hex: y1Color)!, values: y1Coordinates)]
+        self.init(x:xCoordinates, lines:lines)
     }
-}
-
-extension Chart {
-    
-    func xAt(_ index: Int) -> Int {
-        return xCoordinates[index]
-    }
-    
-    func yAt(_ index: Int, forLine line: Int) -> Int {
-        return yCoordinates[line][index]
-    }
-    
-    func colorForLine(_ line: Int) -> String {
-        return colors[line]
-    }
-    
 }
 
 private enum Key {

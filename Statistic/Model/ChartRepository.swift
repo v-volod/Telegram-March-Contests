@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Chart
 
 private let DefaultFileName = "chart_data"
 private let FileType = "json"
