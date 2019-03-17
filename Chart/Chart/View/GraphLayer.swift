@@ -12,7 +12,7 @@ open class GraphLayer: CAShapeLayer {
     public var graph: Graph?
     public var linePath = UIBezierPath()
     
-    public func setGraph(_ graph: Graph, size: CGSize, in bounds: CGRect) {
+    public func update(_ graph: Graph, size: CGSize, in bounds: CGRect) {
         self.graph = graph
         
         linePath.removeAllPoints()
@@ -21,6 +21,8 @@ open class GraphLayer: CAShapeLayer {
         path = linePath.cgPath
         fillColor = UIColor.clear.cgColor
         strokeColor = graph.color.cgColor
+        
+        needsDisplay()
     }
     
 }

@@ -27,17 +27,30 @@ open class ChartView: UIView {
         get {
             return chartLayer.chart
         }
-        set {
-            chartLayer.frame = bounds
-            chartLayer.lineWidth = lineWidth
-            chartLayer.setChart(newValue, range: newValue.x.range)
-        }
+    }
+    
+    public var range: Range<Int> {
+        return chartLayer.range
     }
     
     open override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         
-        chart = .interfaceBuilderChart
+        update(chart: .interfaceBuilderChart)
+    }
+    
+    public func update(chart: Chart) {
+        update(chart: chart, range: chart.x.range)
+    }
+    
+    public func update(range: Range<Int>) {
+        update(chart: chart, range: range)
+    }
+    
+    public func update(chart: Chart, range: Range<Int>) {
+        chartLayer.frame = bounds
+        chartLayer.lineWidth = lineWidth
+        chartLayer.setChart(chart, range: range)
     }
     
 }

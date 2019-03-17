@@ -29,3 +29,9 @@ extension Graph: Equatable {
         return lhs.name == rhs.name
     }
 }
+
+extension Graph: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+    }
+}

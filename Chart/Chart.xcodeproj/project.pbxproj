@@ -9,8 +9,13 @@
 /* Begin PBXBuildFile section */
 		222DE9DC223480BB008D61BA /* Chart.h in Headers */ = {isa = PBXBuildFile; fileRef = 222DE9DA223480BB008D61BA /* Chart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		222DE9E82234816A008D61BA /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222DE9E72234816A008D61BA /* ChartView.swift */; };
+		22CD1C72223D2E4E00587449 /* TrackingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD1C71223D2E4E00587449 /* TrackingType.swift */; };
+		22CD1C74223D4F8600587449 /* CAShapeLayer+Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD1C73223D4F8600587449 /* CAShapeLayer+Track.swift */; };
+		22CD1C76223D5E7900587449 /* MathFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD1C75223D5E7900587449 /* MathFunctions.swift */; };
+		22CD1C78223D9B4500587449 /* ThumbLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD1C77223D9B4500587449 /* ThumbLayer.swift */; };
 		22D52743223B02B30051B6E7 /* IntRangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D52742223B02B30051B6E7 /* IntRangeExtensions.swift */; };
 		22D52745223B06410051B6E7 /* IntArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D52744223B06410051B6E7 /* IntArrayExtensions.swift */; };
+		22D52747223B0C000051B6E7 /* ChartRangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D52746223B0C000051B6E7 /* ChartRangeSlider.swift */; };
 		22E01EEA2238409500100D12 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01EE92238409500100D12 /* Chart.swift */; };
 		22E01EEC223843C800100D12 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01EEB223843C800100D12 /* Graph.swift */; };
 		22E01EEF22384A4800100D12 /* GraphLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01EEE22384A4800100D12 /* GraphLayer.swift */; };
@@ -23,8 +28,13 @@
 		222DE9DA223480BB008D61BA /* Chart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Chart.h; sourceTree = "<group>"; };
 		222DE9DB223480BB008D61BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		222DE9E72234816A008D61BA /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		22CD1C71223D2E4E00587449 /* TrackingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingType.swift; sourceTree = "<group>"; };
+		22CD1C73223D4F8600587449 /* CAShapeLayer+Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Track.swift"; sourceTree = "<group>"; };
+		22CD1C75223D5E7900587449 /* MathFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathFunctions.swift; sourceTree = "<group>"; };
+		22CD1C77223D9B4500587449 /* ThumbLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbLayer.swift; sourceTree = "<group>"; };
 		22D52742223B02B30051B6E7 /* IntRangeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntRangeExtensions.swift; sourceTree = "<group>"; };
 		22D52744223B06410051B6E7 /* IntArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntArrayExtensions.swift; sourceTree = "<group>"; };
+		22D52746223B0C000051B6E7 /* ChartRangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRangeSlider.swift; sourceTree = "<group>"; };
 		22E01EE92238409500100D12 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		22E01EEB223843C800100D12 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		22E01EEE22384A4800100D12 /* GraphLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphLayer.swift; sourceTree = "<group>"; };
@@ -71,6 +81,17 @@
 			path = Chart;
 			sourceTree = "<group>";
 		};
+		22D5274A223B10000051B6E7 /* ChartSlider */ = {
+			isa = PBXGroup;
+			children = (
+				22D52746223B0C000051B6E7 /* ChartRangeSlider.swift */,
+				22CD1C71223D2E4E00587449 /* TrackingType.swift */,
+				22CD1C77223D9B4500587449 /* ThumbLayer.swift */,
+				22CD1C73223D4F8600587449 /* CAShapeLayer+Track.swift */,
+			);
+			path = ChartSlider;
+			sourceTree = "<group>";
+		};
 		22E01EE82238408900100D12 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +107,7 @@
 				222DE9E72234816A008D61BA /* ChartView.swift */,
 				22E01EF3223864E000100D12 /* ChartLayer.swift */,
 				22E01EEE22384A4800100D12 /* GraphLayer.swift */,
+				22D5274A223B10000051B6E7 /* ChartSlider */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -96,6 +118,7 @@
 				22E01EF522386A8800100D12 /* IBChart.swift */,
 				22D52742223B02B30051B6E7 /* IntRangeExtensions.swift */,
 				22D52744223B06410051B6E7 /* IntArrayExtensions.swift */,
+				22CD1C75223D5E7900587449 /* MathFunctions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -179,14 +202,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22CD1C78223D9B4500587449 /* ThumbLayer.swift in Sources */,
+				22CD1C72223D2E4E00587449 /* TrackingType.swift in Sources */,
 				22D52743223B02B30051B6E7 /* IntRangeExtensions.swift in Sources */,
 				22E01EEC223843C800100D12 /* Graph.swift in Sources */,
 				222DE9E82234816A008D61BA /* ChartView.swift in Sources */,
 				22E01EEF22384A4800100D12 /* GraphLayer.swift in Sources */,
 				22E01EF4223864E000100D12 /* ChartLayer.swift in Sources */,
 				22D52745223B06410051B6E7 /* IntArrayExtensions.swift in Sources */,
+				22CD1C76223D5E7900587449 /* MathFunctions.swift in Sources */,
 				22E01EF622386A8800100D12 /* IBChart.swift in Sources */,
+				22CD1C74223D4F8600587449 /* CAShapeLayer+Track.swift in Sources */,
 				22E01EEA2238409500100D12 /* Chart.swift in Sources */,
+				22D52747223B0C000051B6E7 /* ChartRangeSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

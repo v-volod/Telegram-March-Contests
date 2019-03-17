@@ -11,28 +11,29 @@ import Foundation
 private let defaultLineWidth: CGFloat = 1
 
 class ChartLayer: CALayer {
-    public var chart: Chart = .empty
+    override var frame: CGRect {
+        didSet {
+            updateLayers()
+        }
+    }
+    
+    public private(set) var chart: Chart = .empty
     public var range: Range<Int> = .zero
     
     public var lineWidth: CGFloat = defaultLineWidth {
         didSet {
             lineLayers.forEach {
-                $0.lineWidth = lineWidth
+                $1.lineWidth = lineWidth
             }
         }
     }
     
-    var lineLayers: [GraphLayer] {
-        return sublayers?.compactMap({ $0 as? GraphLayer }) ?? []
-    }
+    var lineLayers: [Graph: GraphLayer] = [:]
     
-    public func setChart(_ chart: Chart, range: Range<Int>) {
-        self.chart = chart
-        self.range = range
-      
+    private func updateLayers() {
         let maxValue = chart.maxValue(in: range)
         
-        let xLength = bounds.width / CGFloat(range.count)
+        let xLength = bounds.width / CGFloat(range.count - 1)
         let yLength = bounds.height / CGFloat(maxValue)
         
         let size = CGSize(width: xLength, height: yLength)
@@ -40,13 +41,29 @@ class ChartLayer: CALayer {
         
         let graphBounds = CGRect(origin: origin, size: bounds.size)
         
+        var lineLayer: GraphLayer!
         for line in chart.lines {
-            let lineLayer = GraphLayer()
+            lineLayer = lineLayers[line]
+            
+            if (lineLayer == nil) {
+                lineLayer = GraphLayer()
+                addSublayer(lineLayer)
+                lineLayers[line] = lineLayer
+            }
+            
             lineLayer.lineWidth = lineWidth
-            
-            addSublayer(lineLayer)
-            
-            lineLayer.setGraph(line, size: size, in: graphBounds)
+            lineLayer.update(line, size: size, in: graphBounds)
         }
+    }
+    
+    public func setChart(_ chart: Chart) {
+        setChart(chart, range: chart.x.range)
+    }
+    
+    public func setChart(_ chart: Chart, range: Range<Int>) {
+        self.chart = chart
+        self.range = range
+      
+        updateLayers()
     }
 }
