@@ -14,6 +14,12 @@ open class ChartView: UIView {
     
     override open class var layerClass: AnyClass { return ChartLayer.self }
     
+    open override var frame: CGRect {
+        didSet {
+            update()
+        }
+    }
+    
     @IBInspectable
     public var lineWidth: CGFloat = defaultLineWidth {
         didSet {
