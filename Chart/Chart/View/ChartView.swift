@@ -6,8 +6,10 @@
 //  Copyright © 2019 Vojko Vladimir. All rights reserved.
 //
 import UIKit
+import QuartzCore
 
 private let defaultLineWidth: CGFloat = 1
+private let animationDuration: TimeInterval = 0.3
 
 @IBDesignable
 open class ChartView: UIView {
@@ -45,6 +47,10 @@ open class ChartView: UIView {
         update(chart: .interfaceBuilderChart)
     }
     
+    public func update() {
+        update(chart: chart, range: range)
+    }
+    
     public func update(chart: Chart) {
         update(chart: chart, range: chart.x.range)
     }
@@ -54,9 +60,15 @@ open class ChartView: UIView {
     }
     
     public func update(chart: Chart, range: Range<Int>) {
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(animationDuration)
+        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .easeInEaseOut))
+        
         chartLayer.frame = bounds
         chartLayer.lineWidth = lineWidth
         chartLayer.setChart(chart, range: range)
+        
+        CATransaction.commit()
     }
     
 }

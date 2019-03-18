@@ -15,12 +15,19 @@ open class GraphLayer: CAShapeLayer {
     public func update(_ graph: Graph, size: CGSize, in bounds: CGRect) {
         self.graph = graph
         
+        let animation = CABasicAnimation()
+        animation.fromValue = path
+        
         linePath.removeAllPoints()
         linePath.addGraph(graph, size: size, in: bounds)
         
         path = linePath.cgPath
         fillColor = UIColor.clear.cgColor
         strokeColor = graph.color.cgColor
+        
+        animation.toValue = path
+        
+        add(animation, forKey: #keyPath(path))
         
         needsDisplay()
     }
