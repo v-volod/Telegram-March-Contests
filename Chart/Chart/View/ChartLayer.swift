@@ -32,9 +32,10 @@ class ChartLayer: CALayer {
     
     private func updateLayers() {
         let maxValue = chart.maxValue(in: range)
+        let maxRoundedValue = 10 * (CGFloat(maxValue) / 10.0).rounded(.up)
         
         let xLength = bounds.width / CGFloat(range.count - 1)
-        let yLength = bounds.height / CGFloat(maxValue)
+        let yLength = bounds.height / maxRoundedValue
         
         let size = CGSize(width: xLength, height: yLength)
         let origin = CGPoint(x: -CGFloat(range.startIndex) * size.width, y: 0)

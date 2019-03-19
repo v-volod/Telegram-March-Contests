@@ -27,6 +27,14 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="V7S-tC-3ux"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="axisLineWidth">
+                                                <real key="value" value="0.0050000000000000001"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="axisLineColor">
+                                                <color key="value" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="0.26094285102739728" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JwJ-Rx-cyu" customClass="ChartRangeSlider" customModule="Chart">
                                         <rect key="frame" x="0.0" y="210" width="343" height="40"/>

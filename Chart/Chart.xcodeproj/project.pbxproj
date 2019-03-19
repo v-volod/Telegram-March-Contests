@@ -21,6 +21,7 @@
 		22E01EEF22384A4800100D12 /* GraphLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01EEE22384A4800100D12 /* GraphLayer.swift */; };
 		22E01EF4223864E000100D12 /* ChartLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01EF3223864E000100D12 /* ChartLayer.swift */; };
 		22E01EF622386A8800100D12 /* IBChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01EF522386A8800100D12 /* IBChart.swift */; };
+		22E16D0C224186CA00F16CE2 /* AxisLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E16D0B224186CA00F16CE2 /* AxisLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		22E01EEE22384A4800100D12 /* GraphLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphLayer.swift; sourceTree = "<group>"; };
 		22E01EF3223864E000100D12 /* ChartLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLayer.swift; sourceTree = "<group>"; };
 		22E01EF522386A8800100D12 /* IBChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBChart.swift; sourceTree = "<group>"; };
+		22E16D0B224186CA00F16CE2 /* AxisLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisLayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				222DE9E72234816A008D61BA /* ChartView.swift */,
 				22E01EF3223864E000100D12 /* ChartLayer.swift */,
 				22E01EEE22384A4800100D12 /* GraphLayer.swift */,
+				22E16D0B224186CA00F16CE2 /* AxisLayer.swift */,
 				22D5274A223B10000051B6E7 /* ChartSlider */,
 			);
 			path = View;
@@ -214,6 +217,7 @@
 				22E01EF622386A8800100D12 /* IBChart.swift in Sources */,
 				22CD1C74223D4F8600587449 /* CAShapeLayer+Track.swift in Sources */,
 				22E01EEA2238409500100D12 /* Chart.swift in Sources */,
+				22E16D0C224186CA00F16CE2 /* AxisLayer.swift in Sources */,
 				22D52747223B0C000051B6E7 /* ChartRangeSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
