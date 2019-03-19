@@ -15,6 +15,8 @@ private let animationDuration: TimeInterval = 0.3
 
 private let defaultYAxisCount: Int = 5
 
+private let labelOffset = CGFloat(2)
+
 @IBDesignable
 open class ChartView: UIView {
     
@@ -45,8 +47,8 @@ open class ChartView: UIView {
     
     private var _axisLineWidth: CGFloat = defaultAxisLineWidth {
         didSet {
-            axisLayer.lineWidth = _axisLineWidth
-            axisLayer.setNeedsDisplay()
+            axisLinesLayer.lineWidth = _axisLineWidth
+            axisLinesLayer.setNeedsDisplay()
         }
     }
     @IBInspectable public var axisLineWidth: CGFloat {
@@ -58,15 +60,38 @@ open class ChartView: UIView {
         }
     }
 
-    @IBInspectable public var axisLineColor: UIColor = UIColor.gray {
+    @IBInspectable public var axisLineColor: UIColor = .gray {
         didSet {
-            axisLayer.strokeColor = axisLineColor.cgColor
-            axisLayer.setNeedsDisplay()
+            axisLinesLayer.strokeColor = axisLineColor.cgColor
+            axisLinesLayer.setNeedsDisplay()
+        }
+    }
+    
+    private var _axisTextSize: CGFloat = UIFont.systemFontSize {
+        didSet {
+//            axisLayer.textSize = _axisTextSize
+//            axisLayer.setNeedsDisplay()
+        }
+    }
+    @IBInspectable public var axisTextSize: CGFloat {
+        get {
+            return _axisTextSize
+        }
+        set {
+            _axisTextSize = max(0, newValue)
+        }
+    }
+    @IBInspectable public var axisTextColor: UIColor = .gray {
+        didSet {
+//            axisLayer.textColor = axisTextColor
+//            axisLayer.setNeedsDisplay()
         }
     }
     
     private let chartLayer = ChartLayer()
-    private let axisLayer = AxisLayer()
+    
+    private let axisLinesLayer = CAShapeLayer()
+    private let axisTitlesLayer = CALayer()
     
     public var chart: Chart {
         get {
@@ -91,8 +116,9 @@ open class ChartView: UIView {
     }
     
     private func initLayers() {
-        layer.addSublayer(axisLayer)
+        layer.addSublayer(axisLinesLayer)
         layer.addSublayer(chartLayer)
+        layer.addSublayer(axisTitlesLayer)
     }
     
     open override func prepareForInterfaceBuilder() {
@@ -108,7 +134,7 @@ open class ChartView: UIView {
     }
     
     private func updateLayerFrames() {
-        axisLayer.frame = bounds
+        axisLinesLayer.frame = bounds
         chartLayer.frame = bounds
         
         update()
@@ -131,12 +157,56 @@ open class ChartView: UIView {
         CATransaction.setAnimationDuration(animationDuration)
         CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .easeInEaseOut))
         
-        axisLayer.update(count: yAxisCount)
+        updateAxis(chart: chart, range: range)
         
         chartLayer.lineWidth = lineWidth
         chartLayer.setChart(chart, range: range)
         
         CATransaction.commit()
+    }
+    
+    private func updateAxis(chart: Chart, range: Range<Int>) {
+        axisTitlesLayer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        
+        let maxValue = chart.maxValue(in: range)
+        let maxRoundedValue = Int(10 * (CGFloat(maxValue) / 10.0).rounded(.up))
+        
+        let count = yAxisCount
+        let valueStep = count == 0 ? 0 : maxRoundedValue / (count + 1)
+        
+        let yStep = bounds.size.height / CGFloat(count)
+        let font = UIFont.systemFont(ofSize: axisTextSize)
+        
+        var y: CGFloat!
+        
+        let linesPath = UIBezierPath()
+        for index in 0..<count {
+            y = bounds.size.height - CGFloat(index) * yStep
+            
+            let linePath = UIBezierPath()
+            linePath.move(to: CGPoint(x: bounds.minX, y: y))
+            linePath.addLine(to: CGPoint(x: bounds.maxX, y: y))
+            
+            linesPath.append(linePath)
+            
+            let textLayer = CATextLayer()
+            textLayer.rasterizationScale = UIScreen.main.scale
+            textLayer.contentsScale = UIScreen.main.scale
+            textLayer.string = "\(index * valueStep)"
+            textLayer.foregroundColor = axisTextColor.cgColor
+            textLayer.font = font
+            textLayer.fontSize = axisTextSize
+
+            let size = textLayer.preferredFrameSize()
+
+            y = y - size.height - labelOffset
+
+            textLayer.frame = CGRect(origin: CGPoint(x: bounds.minX, y: y), size: size)
+
+            axisTitlesLayer.addSublayer(textLayer)
+        }
+        
+        axisLinesLayer.path = linesPath.cgPath
     }
     
 }
