@@ -8,11 +8,13 @@
 
 import Foundation
 
-extension Array where Element == Int {
+extension Array {
     var range: Range<Int> {
         return 0..<count
     }
-    
+}
+
+extension Array where Element == Int {
     func max(in range: Range<Int>, opt: Int = 0) -> Int {
         return self[range].max() ?? opt
     }

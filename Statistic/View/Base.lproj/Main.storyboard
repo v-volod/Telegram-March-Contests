@@ -43,6 +43,9 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
                                                 <real key="value" value="1.5"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="xAxisTextSize">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JwJ-Rx-cyu" customClass="ChartRangeSlider" customModule="Chart">
@@ -77,7 +80,7 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="upperValue">
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isContinuous" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isContinuous" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>

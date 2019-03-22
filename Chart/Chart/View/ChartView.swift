@@ -88,10 +88,32 @@ open class ChartView: UIView {
         }
     }
     
+    @IBInspectable public var xAxisTextColor: UIColor {
+        get {
+            return UIColor(cgColor: xAxisLayer.textColor)
+        }
+        set {
+            xAxisLayer.textColor = newValue.cgColor
+        }
+    }
+    
+    private var _xAxisTextSize: CGFloat = UIFont.systemFontSize
+    @IBInspectable public var xAxisTextSize: CGFloat {
+        get {
+            return _xAxisTextSize
+        }
+        set {
+            _xAxisTextSize = max(0, newValue)
+            
+            updateLayerFrames()
+        }
+    }
+    
     private let chartLayer = ChartLayer()
     
     private let axisLinesLayer = CAShapeLayer()
     private let axisTitlesLayer = CALayer()
+    private let xAxisLayer = XAxisLayer()
     
     public var chart: Chart {
         get {
@@ -102,6 +124,14 @@ open class ChartView: UIView {
     public var range: Range<Int> {
         return chartLayer.range
     }
+    
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d"
+        return formatter
+    }()
+    
+    private lazy var xAxisTitles: [String] = dateFormatter.xAxisTitles(for: chart, in: range)
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -119,6 +149,7 @@ open class ChartView: UIView {
         layer.addSublayer(axisLinesLayer)
         layer.addSublayer(chartLayer)
         layer.addSublayer(axisTitlesLayer)
+        layer.addSublayer(xAxisLayer)
     }
     
     open override func prepareForInterfaceBuilder() {
@@ -134,8 +165,19 @@ open class ChartView: UIView {
     }
     
     private func updateLayerFrames() {
-        axisLinesLayer.frame = bounds
-        chartLayer.frame = bounds
+        xAxisLayer.frame = bounds
+        xAxisLayer.textSize = xAxisTextSize
+        
+        let xAxisHeight = xAxisLayer.preferredFrameHeight()
+        let xAxisSize = CGSize(width: bounds.width, height: xAxisHeight)
+        let xAxisPosition = CGPoint(x: 0, y: bounds.height - xAxisHeight)
+        xAxisLayer.frame = CGRect(origin: xAxisPosition, size: xAxisSize)
+        
+        let chartSize = CGSize(width: bounds.width, height: bounds.height - xAxisHeight)
+        let chartFrame = CGRect(origin: .zero, size: chartSize)
+        
+        axisLinesLayer.frame = chartFrame
+        chartLayer.frame = chartFrame
         
         update()
     }
@@ -153,6 +195,8 @@ open class ChartView: UIView {
     }
     
     public func update(chart: Chart, range: Range<Int>) {
+        xAxisTitles = dateFormatter.xAxisTitles(for: chart, in: range)
+        
         CATransaction.begin()
         CATransaction.setAnimationDuration(animationDuration)
         CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .easeInEaseOut))
@@ -162,11 +206,15 @@ open class ChartView: UIView {
         chartLayer.lineWidth = lineWidth
         chartLayer.setChart(chart, range: range)
         
+        xAxisLayer.update(titles: xAxisTitles)
+        
         CATransaction.commit()
     }
     
     private func updateAxis(chart: Chart, range: Range<Int>) {
-        axisTitlesLayer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        axisTitlesLayer.removeAllSublayers()
+        
+        let bounds = axisLinesLayer.bounds
         
         let maxValue = chart.maxValue(in: range)
         let maxRoundedValue = Int(10 * (CGFloat(maxValue) / 10.0).rounded(.up))
@@ -209,4 +257,19 @@ open class ChartView: UIView {
         axisLinesLayer.path = linesPath.cgPath
     }
     
+}
+
+private extension Date {
+    private static let secondInMillisecond = TimeInterval(1000)
+    
+    init(millisecondsSince1970 milliseconds: Int) {
+        self.init(timeIntervalSince1970: TimeInterval(milliseconds) / Date.secondInMillisecond)
+    }
+    
+}
+
+private extension DateFormatter {
+    func xAxisTitles(for chart: Chart, in range: Range<Int>) -> [String] {
+        return chart.x[range].compactMap { string(from: Date(millisecondsSince1970: $0)) }
+    }
 }
