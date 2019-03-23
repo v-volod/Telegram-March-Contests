@@ -21,7 +21,7 @@ private let labelOffset = CGFloat(2)
 open class ChartView: UIView {
     
     override open class var layerClass: AnyClass { return ChartLayer.self }
-    
+
     open override var frame: CGRect {
         didSet {
             updateLayerFrames()
@@ -113,25 +113,12 @@ open class ChartView: UIView {
     
     private let axisLinesLayer = CAShapeLayer()
     private let axisTitlesLayer = CALayer()
+    
     private let xAxisLayer = XAxisLayer()
     
-    public var chart: Chart {
-        get {
-            return chartLayer.chart
-        }
-    }
+    private var chart: Chart = .empty
     
-    public var range: Range<Int> {
-        return chartLayer.range
-    }
-    
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d"
-        return formatter
-    }()
-    
-    private lazy var xAxisTitles: [String] = dateFormatter.xAxisTitles(for: chart, in: range)
+    public var range: Range<Int> = .zero
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -155,7 +142,7 @@ open class ChartView: UIView {
     open override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         
-        update(chart: .interfaceBuilderChart)
+        update(chart: .interfaceBuilderChart, range: Chart.interfaceBuilderChart.x.range)
     }
     
     open override func layoutSubviews() {
@@ -182,12 +169,8 @@ open class ChartView: UIView {
         update()
     }
     
-    public func update() {
-        update(chart: chart, range: range)
-    }
-    
     public func update(chart: Chart) {
-        update(chart: chart, range: chart.x.range)
+        update(chart: chart, range: range)
     }
     
     public func update(range: Range<Int>) {
@@ -195,8 +178,21 @@ open class ChartView: UIView {
     }
     
     public func update(chart: Chart, range: Range<Int>) {
-        xAxisTitles = dateFormatter.xAxisTitles(for: chart, in: range)
+        let oldChart = self.chart
+        let oldRange = self.range
         
+        self.chart = chart
+        self.range = range
+        
+        if oldChart != chart || oldRange != range {
+            xAxisLayer.chart = chart
+            xAxisLayer.range = range
+        }
+        
+        update()
+    }
+    
+    private func update() {
         CATransaction.begin()
         CATransaction.setAnimationDuration(animationDuration)
         CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .easeInEaseOut))
@@ -206,7 +202,7 @@ open class ChartView: UIView {
         chartLayer.lineWidth = lineWidth
         chartLayer.setChart(chart, range: range)
         
-        xAxisLayer.update(titles: xAxisTitles)
+        xAxisLayer.update()
         
         CATransaction.commit()
     }
@@ -257,19 +253,4 @@ open class ChartView: UIView {
         axisLinesLayer.path = linesPath.cgPath
     }
     
-}
-
-private extension Date {
-    private static let secondInMillisecond = TimeInterval(1000)
-    
-    init(millisecondsSince1970 milliseconds: Int) {
-        self.init(timeIntervalSince1970: TimeInterval(milliseconds) / Date.secondInMillisecond)
-    }
-    
-}
-
-private extension DateFormatter {
-    func xAxisTitles(for chart: Chart, in range: Range<Int>) -> [String] {
-        return chart.x[range].compactMap { string(from: Date(millisecondsSince1970: $0)) }
-    }
 }

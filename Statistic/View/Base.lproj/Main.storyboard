@@ -73,7 +73,7 @@
                                             <userDefinedRuntimeAttribute type="color" keyPath="thumbArrowColor">
                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isStepped" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isStepped" value="NO"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="lowerValue">
                                                 <real key="value" value="0.80000000000000004"/>
                                             </userDefinedRuntimeAttribute>

@@ -25,3 +25,10 @@ extension Chart {
         return lines.compactMap { $0.values.max(in: range) }.max() ?? 0
     }
 }
+
+extension Chart : Equatable {
+    public static func == (lhs: Chart, rhs: Chart) -> Bool {
+        return lhs.x == rhs.x && lhs.lines == rhs.lines
+    }
+    
+}

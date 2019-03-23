@@ -26,11 +26,7 @@ class ViewController: UIViewController {
             switch result {
             case let .success(data):
                 if let chart = data.first {
-                    let percent: CGFloat = 0.75
-                    let count = CGFloat(chart.x.count)
-                    let startIndex = Int((percent * count).rounded(.toNearestOrAwayFromZero))
-                    let endIndex = chart.x.count
-                    let range = startIndex ..< endIndex
+                    let range = 0 ..< chart.x.count / 4
                     controller.chartView.update(chart: chart, range: range)
                     controller.chartSlider.chart = chart
                     controller.chartSlider.range = range
