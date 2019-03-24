@@ -15,14 +15,14 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChartCell" rowHeight="279" id="KGk-i7-Jjw" customClass="ChartCell" customModule="Statistic" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="640" height="520.5"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="520"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xdK-eJ-KU6">
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xdK-eJ-KU6">
                         <rect key="frame" x="20" y="10" width="600" height="496"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zxe-eF-3wF" customClass="ChartView" customModule="Chart">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zxe-eF-3wF" customClass="ChartView" customModule="Chart">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="436"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -51,6 +51,9 @@
                                         <real key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipChart" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="axisTextColor">
+                                        <color key="value" red="0.59607843137254901" green="0.61960784313725492" blue="0.63921568627450975" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -65,7 +68,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FHg-hJ-TsR" customClass="ChartRangeSlider" customModule="Chart">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FHg-hJ-TsR" customClass="ChartRangeSlider" customModule="Chart">
                                 <rect key="frame" x="0.0" y="446" width="600" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -113,12 +116,22 @@
                             </mask>
                         </variation>
                     </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No data selected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="szE-Ej-E6y">
+                        <rect key="frame" x="20" y="31" width="600" height="474.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.34509803919999998" green="0.36078431370000003" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="szE-Ej-E6y" secondAttribute="trailing" id="ClP-oB-Xzt"/>
                     <constraint firstItem="xdK-eJ-KU6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="GOe-If-ycA"/>
                     <constraint firstAttribute="bottom" secondItem="xdK-eJ-KU6" secondAttribute="bottom" constant="10" id="Hp6-LB-KNL"/>
                     <constraint firstAttribute="trailing" secondItem="xdK-eJ-KU6" secondAttribute="trailing" constant="20" id="SPy-Jf-SWy"/>
                     <constraint firstItem="xdK-eJ-KU6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="T2i-YS-1tr"/>
+                    <constraint firstItem="szE-Ej-E6y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="TrT-8d-tjf"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="szE-Ej-E6y" secondAttribute="bottom" id="fe1-XF-bbJ"/>
+                    <constraint firstItem="szE-Ej-E6y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="nmd-wX-bFx"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -126,6 +139,7 @@
             <connections>
                 <outlet property="chartSlider" destination="FHg-hJ-TsR" id="VzA-cA-QLg"/>
                 <outlet property="chartView" destination="zxe-eF-3wF" id="p4v-Ld-SNh"/>
+                <outlet property="noDataLabel" destination="szE-Ej-E6y" id="Qkc-Gk-xns"/>
             </connections>
             <point key="canvasLocation" x="87.256371814092958" y="160"/>
         </tableViewCell>
