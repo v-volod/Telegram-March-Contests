@@ -14,6 +14,8 @@ public class Chart {
     public let x: [Int]
     public let lines: [Graph]
     
+    public lazy var range: Range<Int> = (x.count - x.count / 4)..<x.count
+    
     public init(x: [Int], lines: [Graph]) {
         self.x = x
         self.lines = lines
@@ -22,7 +24,7 @@ public class Chart {
 
 extension Chart {
     public func maxValue(in range: Range<Int>) -> Int {
-        return lines.compactMap { $0.values.max(in: range) }.max() ?? 0
+        return lines.filter({ $0.isEnabled }).compactMap { $0.values.max(in: range) }.max() ?? 0
     }
 }
 

@@ -41,7 +41,7 @@ open class ChartView: UIView {
         }
         set {
             _yAxisCount = max(0, newValue)
-            update()
+            updateLayers()
         }
     }
     
@@ -69,8 +69,7 @@ open class ChartView: UIView {
     
     private var _axisTextSize: CGFloat = UIFont.systemFontSize {
         didSet {
-//            axisLayer.textSize = _axisTextSize
-//            axisLayer.setNeedsDisplay()
+            updateLayers()
         }
     }
     @IBInspectable public var axisTextSize: CGFloat {
@@ -83,8 +82,7 @@ open class ChartView: UIView {
     }
     @IBInspectable public var axisTextColor: UIColor = .gray {
         didSet {
-//            axisLayer.textColor = axisTextColor
-//            axisLayer.setNeedsDisplay()
+            updateLayers()
         }
     }
     
@@ -166,18 +164,22 @@ open class ChartView: UIView {
         axisLinesLayer.frame = chartFrame
         chartLayer.frame = chartFrame
         
-        update()
+        updateLayers()
     }
     
-    public func update(chart: Chart) {
-        update(chart: chart, range: range)
+    public func update(animated: Bool = true) {
+        update(chart: chart, range: range, animated: animated)
     }
     
-    public func update(range: Range<Int>) {
-        update(chart: chart, range: range)
+    public func update(chart: Chart, animated: Bool = true) {
+        update(chart: chart, range: range, animated: animated)
     }
     
-    public func update(chart: Chart, range: Range<Int>) {
+    public func update(range: Range<Int>, animated: Bool = true) {
+        update(chart: chart, range: range, animated: animated)
+    }
+    
+    public func update(chart: Chart, range: Range<Int>, animated: Bool = true) {
         let oldChart = self.chart
         let oldRange = self.range
         
@@ -189,13 +191,29 @@ open class ChartView: UIView {
             xAxisLayer.range = range
         }
         
-        update()
+        updateLayers(animated: animated)
     }
     
-    private func update() {
+    private func updateLayers(animated: Bool = true) {
         CATransaction.begin()
-        CATransaction.setAnimationDuration(animationDuration)
-        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .easeInEaseOut))
+        
+        let opacity = layer.opacity
+        
+        layer.opacity = chart.lines.filter({ $0.isEnabled }).isEmpty ? 0 : 1.0
+        
+        if (animated) {
+            CATransaction.setAnimationDuration(animationDuration)
+            CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .easeInEaseOut))
+            
+            let animation = CABasicAnimation()
+            animation.fromValue = opacity
+            animation.toValue = layer.opacity
+            
+            layer.add(animation, forKey: #keyPath(CALayer.opacity))
+            
+        } else {
+            CATransaction.setDisableActions(true)
+        }
         
         updateAxis(chart: chart, range: range)
         
@@ -203,7 +221,7 @@ open class ChartView: UIView {
         chartLayer.setChart(chart, range: range)
         
         xAxisLayer.update()
-        
+
         CATransaction.commit()
     }
     

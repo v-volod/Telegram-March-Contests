@@ -280,6 +280,10 @@ open class ChartRangeSlider: UIControl {
         chart = .interfaceBuilderChart
     }
     
+    public func update() {
+        chartLayer.update()
+    }
+    
 }
 
 // Mark - Touch events

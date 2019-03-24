@@ -13,6 +13,8 @@ public class Graph {
     public let color: UIColor
     public let values: [Int]
     
+    public var isEnabled: Bool = true
+    
     public init(name: String, color: UIColor, values: [Int]) {
         self.name = name
         self.color = color

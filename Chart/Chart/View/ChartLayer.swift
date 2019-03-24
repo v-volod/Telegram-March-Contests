@@ -30,7 +30,7 @@ class ChartLayer: CALayer {
     
     var lineLayers: [Graph: GraphLayer] = [:]
     
-    private func updateLayers() {
+    private func updateLayers(removeLines: Bool = false) {
         let maxValue = chart.maxValue(in: range)
         let maxRoundedValue = 10 * (CGFloat(maxValue) / 10.0).rounded(.up)
         
@@ -42,19 +42,31 @@ class ChartLayer: CALayer {
         
         let graphBounds = CGRect(origin: origin, size: bounds.size)
         
-        var lineLayer: GraphLayer!
-        for line in chart.lines {
-            lineLayer = lineLayers[line]
-            
-            if (lineLayer == nil) {
-                lineLayer = GraphLayer()
-                addSublayer(lineLayer)
-                lineLayers[line] = lineLayer
+        let lines = chart.lines.filter { $0.isEnabled }
+        let removedLines = chart.lines.filter { !$0.isEnabled }
+        
+        if removeLines {
+            removeAllSublayers()
+        } else {
+            for line in removedLines {
+                lineLayers[line]?.removeFromSuperlayer()
             }
-            
+        }
+        
+        var lineLayer: GraphLayer!
+        
+        for line in lines {
+            lineLayer = lineLayers[line] ?? GraphLayer()
             lineLayer.lineWidth = lineWidth
             lineLayer.update(line, size: size, in: graphBounds)
+            
+            lineLayers[line] = lineLayer
+            
+            if lineLayer.superlayer == nil {
+                addSublayer(lineLayer)
+            }
         }
+        
     }
     
     public func setChart(_ chart: Chart) {
@@ -62,9 +74,14 @@ class ChartLayer: CALayer {
     }
     
     public func setChart(_ chart: Chart, range: Range<Int>) {
+        let chartChanged = self.chart != chart
         self.chart = chart
         self.range = range
       
-        updateLayers()
+        updateLayers(removeLines: chartChanged)
+    }
+    
+    public func update() {
+        updateLayers(removeLines: false)
     }
 }

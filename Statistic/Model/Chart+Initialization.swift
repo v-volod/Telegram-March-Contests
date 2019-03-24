@@ -10,39 +10,39 @@ import Foundation
 import Chart
 
 extension Chart {
-    
     convenience init?(dict: [String: Any]) {
         guard let columns = dict[Key.columns] as? [[Any]],
-            let colors = dict[Key.colors] as? [String: String] else { return nil }
+            let colors = dict[Key.colors] as? [String: String],
+            let columnTypes = dict[Key.types] as? [String: String] else { return nil }
         
-        var xValues: [Int]?
-        var y0Values: [Int]?
-        var y1Values: [Int]?
+        var columnValues: [String: [Int]] = [:]
+        var columnColors: [String: UIColor] = [:]
         
-        columns.forEach { (columnValues) in
-            guard let columnName = columnValues.first as? String,
-                let column = Column.init(rawValue: columnName),
-                let values = Array.init(columnValues.dropFirst()) as? [Int] else { return }
-            
-            switch (column) {
-            case .x:
-                xValues = values
-            case .y0:
-                y0Values = values
-            case .y1:
-                y1Values = values
+        columns.forEach {
+            if let column = $0.first as? String, let values = Array.init($0.dropFirst()) as? [Int] {
+                columnValues[column] = values
             }
         }
         
-        guard let y0Color = colors[Column.y0.rawValue],
-            let y1Color = colors[Column.y1.rawValue],
-            let xCoordinates = xValues,
-            let y0Coordinates = y0Values,
-            let y1Coordinates = y1Values else { return nil }
+        colors.forEach {
+            columnColors[$0] = UIColor(hex: $1)!
+        }
         
-        let lines = [Graph(name: "y0", color: UIColor(hex: y0Color)!, values: y0Coordinates),
-                     Graph(name: "y1", color: UIColor(hex: y1Color)!, values: y1Coordinates)]
-        self.init(x:xCoordinates, lines:lines)
+        guard let xColumn = (columnTypes.first { $0.value == ColumnType.x.rawValue })?.key else { return nil }
+        
+        guard let x = columnValues[xColumn] else { return nil }
+        
+        var lines: [Graph] = []
+        
+        let lineNames = columnTypes.keys.filter({ columnTypes[$0] == ColumnType.line.rawValue })
+        
+        for name in lineNames.sorted() {
+            if let values = columnValues[name], let color = columnColors[name] {
+                lines.append(Graph(name: name, color: color, values: values))
+            }
+        }
+        
+        self.init(x: x, lines: lines)
     }
 }
 
@@ -50,10 +50,10 @@ private enum Key {
     static let types = "types"
     static let colors = "colors"
     static let columns = "columns"
+    static let names = "names"
 }
 
-private enum Column: String, CaseIterable {
+private enum ColumnType: String, CaseIterable {
     case x
-    case y0
-    case y1
+    case line
 }
