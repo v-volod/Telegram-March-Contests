@@ -128,12 +128,14 @@ open class ChartView: UIView {
         super.init(frame: frame)
         
         initLayers()
+        initTouches()
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         initLayers()
+        initTouches()
     }
     
     private func initLayers() {
@@ -142,6 +144,11 @@ open class ChartView: UIView {
         layer.addSublayer(chartLayer)
         layer.addSublayer(axisTitlesLayer)
         layer.addSublayer(xAxisLayer)
+    }
+    
+    private func initTouches() {
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTap(_:))))
+        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(didPan(_:))))
     }
     
     open override func prepareForInterfaceBuilder() {
@@ -276,6 +283,32 @@ open class ChartView: UIView {
         }
         
         axisLinesLayer.path = linesPath.cgPath
+    }
+    
+    // MARK: - Actions
+    
+    @objc func didTap(_ sender: UITapGestureRecognizer) {
+        show(at: sender.location(in: self))
+    }
+    
+    @objc func didPan(_ sender: UIPanGestureRecognizer) {
+        if sender.state == .changed {
+            show(at: sender.location(in: self))
+        }
+    }
+    
+    private func show(at location: CGPoint) {
+        if chartLayer.isPointsShown {
+            chartLayer.hidePoints()
+        } else {
+            let percent = min(1.0, max(0.0, location.x / frame.width))
+            let relativeIndex = Int((CGFloat(range.count - 1) * percent).rounded(.down))
+            let absoluteIndex = range.startIndex + relativeIndex
+            
+            chartLayer.showPointsAt(absoluteIndex)
+            
+            print("didTap: [\(absoluteIndex)] = \(chart.x[absoluteIndex])")
+        }
     }
     
 }
