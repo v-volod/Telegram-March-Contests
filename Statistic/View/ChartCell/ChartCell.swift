@@ -25,7 +25,7 @@ class ChartCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        layer.masksToBounds = true
+        chartView.layer.masksToBounds = true
     }
     
     override func layoutSubviews() {

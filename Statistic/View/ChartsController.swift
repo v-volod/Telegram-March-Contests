@@ -19,6 +19,7 @@ class ChartsController: UITableViewController {
         
         tableView.register(ChartCell.self)
         tableView.register(LineCell.self)
+        tableView.register(ButtonCell.self)
         
         repository.load { [weak self] result in
             guard let controller = self else { return }
@@ -50,10 +51,14 @@ class ChartsController: UITableViewController {
 
 extension ChartsController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return data.count
+        return data.count + 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (section == numberOfSections(in: tableView) - 1) {
+            return 1
+        }
+        
         return 1 + data[section].lines.count
     }
     
@@ -64,16 +69,18 @@ extension ChartsController {
                 let cell = tableView.dequeue(ChartCell.self, for: indexPath)
                 cell.show(data[indexPath.section])
                 cell.delegate = self
-                
                 return cell
             } else {
                 let cell = tableView.dequeue(LineCell.self, for: indexPath)
                 cell.show(data[indexPath.section].lines[indexPath.row - 1])
                 return cell
             }
+        } else {
+            let cell = tableView.dequeue(ButtonCell.self, for: indexPath)
+            cell.button.setTitle(Theme.current.actionTitle, for: .normal)
+            cell.delegate = self
+            return cell
         }
-        
-        fatalError()
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -85,34 +92,25 @@ extension ChartsController {
 
 extension ChartsController {
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return indexPath.row == 0 ? nil : indexPath
+        return indexPath.section == numberOfSections(in: tableView) - 1 || indexPath.row == 0 ? nil : indexPath
     }
     
     override func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
-        return self.tableView(tableView, willSelectRowAt: indexPath)
+        return indexPath.section == numberOfSections(in: tableView) - 1 || indexPath.row == 0 ? nil : indexPath
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("didSelectRowAt \(indexPath)")
-        
-        data[indexPath.section].lines[indexPath.row - 1].isEnabled = true
-        
         if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: indexPath.section)) as? ChartCell {
+            data[indexPath.section].lines[indexPath.row - 1].isEnabled = true
             cell.update()
         }
-//        tableView.reloadRows(at: [IndexPath(row: 0, section: indexPath.section)], with: .none)
     }
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        print("didDeselectRowAt \(indexPath)")
-        
-        data[indexPath.section].lines[indexPath.row - 1].isEnabled = false
-        
         if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: indexPath.section)) as? ChartCell {
+            data[indexPath.section].lines[indexPath.row - 1].isEnabled = false
             cell.update()
         }
-
-//        tableView.reloadRows(at: [IndexPath(row: 0, section: indexPath.section)], with: .none)
     }
 }
 
@@ -123,5 +121,15 @@ extension ChartsController : ChartCellDelegate {
         if let indexPath = tableView.indexPath(for: cell) {
             data[indexPath.section].range = range
         }
+    }
+}
+
+// MARK: - ButtonCellDelegate -
+
+extension ChartsController : ButtonCellDelegate {
+    func buttonCellDidPressed(_ cell: ButtonCell) {
+        Theme.toggle()
+        
+        cell.button.setTitle(Theme.current.actionTitle, for: .normal)
     }
 }

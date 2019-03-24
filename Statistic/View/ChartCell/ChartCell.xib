@@ -50,6 +50,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="xAxisTextSize">
                                         <real key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipChart" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">

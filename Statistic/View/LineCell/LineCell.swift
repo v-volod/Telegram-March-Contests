@@ -11,12 +11,19 @@ import Chart
 
 class LineCell: UITableViewCell {
     
+    @objc dynamic var titleTextColor: UIColor? = .black {
+        didSet {
+            titleLabel?.textColor = titleTextColor
+        }
+    }
+    
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        titleLabel.textColor = titleTextColor
         colorView.layer.cornerRadius = 2.0
     }
     

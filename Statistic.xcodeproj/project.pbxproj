@@ -17,6 +17,9 @@
 		222DE9C622347FBC008D61BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 222DE9C422347FBC008D61BA /* LaunchScreen.storyboard */; };
 		222DE9E3223480FB008D61BA /* Chart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222DE9E2223480FB008D61BA /* Chart.framework */; };
 		222DE9E4223480FB008D61BA /* Chart.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 222DE9E2223480FB008D61BA /* Chart.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		224993B42247D70E008F2265 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224993B32247D70E008F2265 /* Theme.swift */; };
+		224993BA2247E49E008F2265 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224993B82247E49E008F2265 /* ButtonCell.swift */; };
+		224993BB2247E49E008F2265 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 224993B92247E49E008F2265 /* ButtonCell.xib */; };
 		228D37112235D63E005D1B76 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D37102235D63E005D1B76 /* UIColor+Hex.swift */; };
 		22E9C1BA2246E026008E12CA /* ChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E9C1B92246E026008E12CA /* ChartCell.swift */; };
 		22E9C1BC2246E8AC008E12CA /* UITableView+Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E9C1BB2246E8AC008E12CA /* UITableView+Registration.swift */; };
@@ -52,6 +55,9 @@
 		222DE9C522347FBC008D61BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		222DE9C722347FBC008D61BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		222DE9E2223480FB008D61BA /* Chart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Chart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		224993B32247D70E008F2265 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		224993B82247E49E008F2265 /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		224993B92247E49E008F2265 /* ButtonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
 		228D37102235D63E005D1B76 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		22E9C1B92246E026008E12CA /* ChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCell.swift; sourceTree = "<group>"; };
 		22E9C1BB2246E8AC008E12CA /* UITableView+Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Registration.swift"; sourceTree = "<group>"; };
@@ -100,6 +106,7 @@
 				22FE12662246DC6000EDAD51 /* ChartsController.swift */,
 				22FE126C2246DC7F00EDAD51 /* ChartCell */,
 				22E9C1C12246FD3A008E12CA /* LineCell */,
+				224993BC2247E889008F2265 /* ButtonCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -124,6 +131,7 @@
 		222DE9BA22347FBB008D61BA /* Statistic */ = {
 			isa = PBXGroup;
 			children = (
+				224993B52247D7BA008F2265 /* Theme */,
 				222DE9BB22347FBB008D61BA /* AppDelegate.swift */,
 				2203C40A2235A4B700102012 /* Model */,
 				2203C40B2235A4C400102012 /* View */,
@@ -140,6 +148,23 @@
 				222DE9E2223480FB008D61BA /* Chart.framework */,
 			);
 			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		224993B52247D7BA008F2265 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				224993B32247D70E008F2265 /* Theme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		224993BC2247E889008F2265 /* ButtonCell */ = {
+			isa = PBXGroup;
+			children = (
+				224993B92247E49E008F2265 /* ButtonCell.xib */,
+				224993B82247E49E008F2265 /* ButtonCell.swift */,
+			);
+			path = ButtonCell;
 			sourceTree = "<group>";
 		};
 		228D370F2235D5C0005D1B76 /* Extensions */ = {
@@ -232,6 +257,7 @@
 				222DE9C622347FBC008D61BA /* LaunchScreen.storyboard in Resources */,
 				222DE9C322347FBC008D61BA /* Assets.xcassets in Resources */,
 				22E9C1C02246FD35008E12CA /* LineCell.xib in Resources */,
+				224993BB2247E49E008F2265 /* ButtonCell.xib in Resources */,
 				2203C4072235A24300102012 /* chart_data.json in Resources */,
 				222DE9C122347FBB008D61BA /* Main.storyboard in Resources */,
 			);
@@ -251,8 +277,10 @@
 				2203C4102235AE1F00102012 /* Result.swift in Sources */,
 				22E9C1BA2246E026008E12CA /* ChartCell.swift in Sources */,
 				228D37112235D63E005D1B76 /* UIColor+Hex.swift in Sources */,
+				224993B42247D70E008F2265 /* Theme.swift in Sources */,
 				2203C4092235A33400102012 /* ChartRepository.swift in Sources */,
 				222DE9BC22347FBB008D61BA /* AppDelegate.swift in Sources */,
+				224993BA2247E49E008F2265 /* ButtonCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

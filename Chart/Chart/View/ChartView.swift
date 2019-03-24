@@ -107,6 +107,12 @@ open class ChartView: UIView {
         }
     }
     
+    @IBInspectable public var clipChart: Bool = false {
+        didSet {
+            chartLayer.masksToBounds = clipChart
+        }
+    }
+    
     private let chartLayer = ChartLayer()
     
     private let axisLinesLayer = CAShapeLayer()
@@ -131,6 +137,7 @@ open class ChartView: UIView {
     }
     
     private func initLayers() {
+        chartLayer.masksToBounds = clipChart
         layer.addSublayer(axisLinesLayer)
         layer.addSublayer(chartLayer)
         layer.addSublayer(axisTitlesLayer)
